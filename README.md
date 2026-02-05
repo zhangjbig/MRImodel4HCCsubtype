@@ -1,7 +1,7 @@
 # MRImodel4HCCsubtype
 ## This is a resource for the article: 
-"Novel HBV-HCC Molecular Subtypes Coupled with a Non-Invasive MRI Model", 
-It includes all code used for the analysis of single cell RNA sequencing data, MRI image data and final prediction model.
+### "Novel HBV-HCC Molecular Subtypes Coupled with a Non-Invasive MRI Model", 
+### It includes all code used for the analysis of single cell RNA sequencing data, MRI image data and final prediction model.
 
 
 ## Single Cell RNA Sequencing Data Analysis Code:
