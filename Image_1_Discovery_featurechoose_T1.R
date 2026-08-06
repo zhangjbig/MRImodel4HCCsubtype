@@ -17,17 +17,17 @@ library(dplyr)
 
 
 ##########################################################     Part1:  T1-weight
-clinical <- read.csv('ScRNA_6_group_result_finish.csv')
+clinical <- read.csv('./datafile/Discovery_group_result.csv')
 clinical <- data.frame(clinical)
 head(clinical)
 
 
 #######################------------------------------------------------------
-T1data <- read_excel('Discovery Cohort_upload.xlsx',sheet = 'Radiomics-FeaturesT1')
+T1data <- read_excel('./datafile/Discovery Cohort_upload.xlsx',sheet = 'Radiomics-FeaturesT1')
 T1data <- data.frame(T1data)
 colnames(T1data)[-1] <- paste0("T1_",colnames(T1data)[-1])
 sample <- T1data$PatientID
-group <- sapply(sample,function(x) clinical$groupD[which(clinical$PatientID == x)]);group
+group <- sapply(sample,function(x) clinical$Group_result[which(clinical$PatientID == x)]);group
 
 T1datause <- data.frame(sample= sample,group=group,T1data)
 T1datause <- subset(T1datause,select=-c(PatientID))
@@ -43,7 +43,7 @@ hist(T1cv_report$CV[which(T1cv_report$CV <= 50)], breaks = 100, main = "CV值分
 hist(T1cv_report$CV[which(T1cv_report$CV <= 10)], breaks = 20, main = "CV值分布", xlab = "CV值")
 T1datause_choose <- T1datause[,c("sample","group",T1cv_report$Feature[which(T1cv_report$CV < 1.5)])]  
 dim(T1datause_choose)
-saveRDS(T1datause_choose,"T1datause_choose.rds")
+# saveRDS(T1datause_choose,"T1datause_choose.rds")
 
 
 #######################-------- Step1:   RandomForest choose features  
@@ -95,7 +95,7 @@ dataMatrix <- T1datause_choose
 colnames(dataMatrix)[1:20]
 dataMatrix <- subset(dataMatrix,select = -c(sample,group))
 dim(dataMatrix) 
-group <- sapply(rownames(dataMatrix) ,function(x) clinical$groupD[which(clinical$PatientID == x)])
+group <- sapply(rownames(dataMatrix) ,function(x) clinical$Group_result[which(clinical$PatientID == x)])
 group <- as.factor(as.character(group));table(group)  
 
 

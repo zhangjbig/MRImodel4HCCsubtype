@@ -17,17 +17,17 @@ library(dplyr)
 
 
 ##########################################################     Part1:  T2-weight
-clinical <- read.csv('ScRNA_6_group_result_finish.csv')
+clinical <- read.csv('./datafile/Discovery_group_result.csv')
 clinical <- data.frame(clinical)
 head(clinical)
 
 
 #######################------------------------------------------------------
-T2data <- read_excel('Discovery Cohort_upload.xlsx',sheet = 'Radiomics-FeaturesT2')
+T2data <- read_excel('./datafile/Discovery Cohort_upload.xlsx',sheet = 'Radiomics-FeaturesT2')
 T2data <- data.frame(T2data)
 colnames(T2data)[-1] <- paste0("T2_",colnames(T2data)[-1])
 sample <- T2data$PatientID
-group <- sapply(sample,function(x) clinical$groupD[which(clinical$PatientID == x)]);group
+group <- sapply(sample,function(x) clinical$Group_result[which(clinical$PatientID == x)]);group
 
 T2datause <- data.frame(sample= sample,group=group,T2data)
 T2datause <- subset(T2datause,select=-c(PatientID))
@@ -95,7 +95,7 @@ dataMatrix <- T2datause_choose
 colnames(dataMatrix)[1:20]
 dataMatrix <- subset(dataMatrix,select = -c(sample,group))
 dim(dataMatrix) 
-group <- sapply(rownames(dataMatrix) ,function(x) clinical$groupD[which(clinical$PatientID == x)])
+group <- sapply(rownames(dataMatrix) ,function(x) clinical$Group_result[which(clinical$PatientID == x)])
 group <- as.factor(as.character(group));table(group)  
 
 

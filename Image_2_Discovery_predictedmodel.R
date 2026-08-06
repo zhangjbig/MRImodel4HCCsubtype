@@ -17,7 +17,7 @@ library(dplyr)
 
 
 ##########################################################     Part1:  T1-weight
-clinical <- read.csv('ScRNA_6_group_result_finish.csv')
+clinical <- read.csv('./datafile/Discovery_group_result.csv')
 clinical <- data.frame(clinical)
 head(clinical)
 
